@@ -20,5 +20,28 @@ export async function resolveViaSongLink(sourceUrl: string, targetPlatform: Plat
   if (!targetUrl) {
     throw new AppError("NO_MATCH", "Songlink did not return a target URL.", 404);
   }
+  if (targetPlatform === "APPLE_MUSIC") {
+    return normalizeAppleMusicUrl(targetUrl);
+  }
   return targetUrl;
+}
+
+function normalizeAppleMusicUrl(rawUrl: string): string {
+  let parsed: URL;
+  try {
+    parsed = new URL(rawUrl);
+  } catch {
+    return rawUrl;
+  }
+
+  if (parsed.hostname === "geo.music.apple.com") {
+    parsed.hostname = "music.apple.com";
+  }
+
+  const removableParams = ["app", "ls", "at", "ct", "itscg", "itsct", "mt", "uo"];
+  for (const key of removableParams) {
+    parsed.searchParams.delete(key);
+  }
+
+  return parsed.toString();
 }
