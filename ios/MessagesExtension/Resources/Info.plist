@@ -12,6 +12,8 @@
   <string>6.0</string>
   <key>CFBundleName</key>
   <string>$(PRODUCT_NAME)</string>
+  <key>CFBundleDisplayName</key>
+  <string>Music Converter</string>
   <key>CFBundlePackageType</key>
   <string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
   <key>CFBundleShortVersionString</key>
@@ -19,7 +21,7 @@
   <key>CFBundleVersion</key>
   <string>1</string>
   <key>BACKEND_BASE_URL</key>
-  <string>https://example.music-converter.workers.dev</string>
+  <string>https://music-converter.meghrp27.workers.dev</string>
   <key>NSExtension</key>
   <dict>
     <key>NSExtensionAttributes</key>

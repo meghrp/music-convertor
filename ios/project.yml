@@ -18,6 +18,11 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.example.musicconverter
+        DEVELOPMENT_TEAM: SL7FG4PAZA
+        CODE_SIGN_STYLE: Automatic
+    dependencies:
+      - target: MusicConverterMessagesExtension
+        embed: true
     scheme:
       testTargets:
         - MusicConverterTests
@@ -35,6 +40,8 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.example.musicconverter.messages
         INFOPLIST_KEY_CFBundleDisplayName: Music Converter
+        DEVELOPMENT_TEAM: SL7FG4PAZA
+        CODE_SIGN_STYLE: Automatic
     dependencies:
       - sdk: Messages.framework
       - sdk: SwiftUI.framework
