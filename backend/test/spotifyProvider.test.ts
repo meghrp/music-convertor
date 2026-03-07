@@ -29,25 +29,19 @@ describe("spotify provider token cache", () => {
   });
 
   it("reuses cached spotify token across searches", async () => {
-    const fetchMock = vi.spyOn(globalThis, "fetch" as any).mockImplementation(async (input: RequestInfo | URL) => {
-      const url = input.toString();
+    const fetchMock = vi.fn(async (input: Parameters<typeof fetch>[0]) => {
+      const url = String(input);
       if (url.includes("accounts.spotify.com")) {
         return new Response(JSON.stringify({ access_token: "abc", expires_in: 3600 }), { status: 200 });
       }
-      return new Response(
-        JSON.stringify({
-          tracks: {
-            items: []
-          }
-        }),
-        { status: 200 }
-      );
+      return new Response(JSON.stringify({ tracks: { items: [] } }), { status: 200 });
     });
+    vi.stubGlobal("fetch", fetchMock as typeof fetch);
 
     await searchSpotifyCandidates(env, sourceTrack);
     await searchSpotifyCandidates(env, sourceTrack);
 
-    const tokenCalls = fetchMock.mock.calls.filter((call) => call[0].toString().includes("accounts.spotify.com")).length;
+    const tokenCalls = fetchMock.mock.calls.filter((call) => String(call[0]).includes("accounts.spotify.com")).length;
     expect(tokenCalls).toBe(1);
   });
 });
