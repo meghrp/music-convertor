@@ -1,6 +1,6 @@
 # Music Converter
 
-Greenfield project for converting Apple Music track links to Spotify and Spotify track links to Apple Music.
+iOS + Cloudflare Workers app for converting Apple Music track links to Spotify and Spotify track links to Apple Music.
 
 ## Repository Layout
 
@@ -18,3 +18,8 @@ Greenfield project for converting Apple Music track links to Spotify and Spotify
 6. Set `BACKEND_BASE_URL` in `ios/MessagesExtension/Resources/Info.plist` to your Worker URL.
 
 Detailed setup is documented in `docs/architecture.md` and `backend/README.md`.
+
+## Release Readiness
+
+- Run `scripts/ci/testflight-readiness.sh` before cutting a TestFlight build.
+- Follow `docs/testflight-checklist.md` for packaging, privacy, and release steps.

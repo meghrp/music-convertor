@@ -1,0 +1,29 @@
+name: iOS Release Build
+
+on:
+  pull_request:
+    paths:
+      - 'ios/**'
+      - '.github/workflows/ios-release-build.yml'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate project
+        working-directory: ios
+        run: xcodegen generate
+
+      - name: Build Release (simulator, unsigned)
+        working-directory: ios
+        run: |
+          xcodebuild -project MusicConverter.xcodeproj -scheme MusicConverterApp \
+            -destination 'generic/platform=iOS Simulator' \
+            -configuration Release CODE_SIGNING_ALLOWED=NO build

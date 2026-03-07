@@ -13,6 +13,7 @@
 		4AA552276486798FEF4DD7D1 /* MusicConverterMessagesExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2F2C2AF82BF197C2DC822D9D /* MusicConverterMessagesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		59D391618D7AA55E6B0D07E5 /* MusicLinkParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1ECF222DEB06A309960317B /* MusicLinkParserTests.swift */; };
 		5A40675848BA06EFB2765E27 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFFB8CEE14DA243382ED942 /* MessagesViewController.swift */; };
+		5EE9390D142414C9AAA4E1E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA23D3577868EAF86CA1C6B9 /* Assets.xcassets */; };
 		5F3941E4626C4E2472959AF6 /* MusicLinkParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F0CF00C474C46292B05BEE /* MusicLinkParser.swift */; };
 		715F0E181DC1516FB814D9A8 /* ConversionAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EE8683EADFE1AD463D2DCD /* ConversionAPI.swift */; };
 		8F4A91897EA4C54630D80691 /* MusicLinkParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F0CF00C474C46292B05BEE /* MusicLinkParser.swift */; };
@@ -21,6 +22,7 @@
 		C0AA4EDCFA7D382D1B55F1E6 /* ConversionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBD304C999B71B08CDF55C4 /* ConversionView.swift */; };
 		CB6408ED462E41E14CCC8329 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1632C91D4964D62642BEC9A9 /* SceneDelegate.swift */; };
 		E051627D5A1CF97C42FDFCC3 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A08699FABFB5EC3996EA8AD /* AppConfig.swift */; };
+		F5B0DD91B2F8FD5F02E6A0D3 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 7EC3FD227DF05E21A0609E97 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,7 @@
 		2F2C2AF82BF197C2DC822D9D /* MusicConverterMessagesExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = MusicConverterMessagesExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		60852984EC1CBACD551588EC /* ConversionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionViewModel.swift; sourceTree = "<group>"; };
 		7A08699FABFB5EC3996EA8AD /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		7EC3FD227DF05E21A0609E97 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		83BB849DE48FC376AADC9EB9 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		8BC4DA9A5F72191A18B0E089 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CFFB8CEE14DA243382ED942 /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +70,7 @@
 		B1ECF222DEB06A309960317B /* MusicLinkParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicLinkParserTests.swift; sourceTree = "<group>"; };
 		C77B4CE18F4DA79167D29D94 /* MusicConverterApp.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = MusicConverterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1F0CF00C474C46292B05BEE /* MusicLinkParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicLinkParser.swift; sourceTree = "<group>"; };
+		DA23D3577868EAF86CA1C6B9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E20790111B1581B7B91577AA /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
 		EB08FED130C966B12236EA32 /* ConversionClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionClient.swift; sourceTree = "<group>"; };
 		EF4A5740A4C110FBEBE95386 /* MusicConverterTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = MusicConverterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,6 +127,16 @@
 			path = App/Sources;
 			sourceTree = "<group>";
 		};
+		96BEF39763E2A63E71969566 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DA23D3577868EAF86CA1C6B9 /* Assets.xcassets */,
+				7EC3FD227DF05E21A0609E97 /* PrivacyInfo.xcprivacy */,
+			);
+			name = Resources;
+			path = App/Resources;
+			sourceTree = "<group>";
+		};
 		B818F5302469C966B7C89D5D /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +163,7 @@
 		F74FCD836537FAB3042B23D4 = {
 			isa = PBXGroup;
 			children = (
+				96BEF39763E2A63E71969566 /* Resources */,
 				83BFC1E9D2A06BCE3B03DEB7 /* Sources */,
 				B818F5302469C966B7C89D5D /* Sources */,
 				F4611B60D2386746D13AEFF3 /* Sources */,
@@ -202,6 +217,7 @@
 			buildConfigurationList = 470775CDDA900899905BEA20 /* Build configuration list for PBXNativeTarget "MusicConverterApp" */;
 			buildPhases = (
 				AAE7E8EC350D7B50A522C987 /* Sources */,
+				FC30F45BAE022B2E867EA26C /* Resources */,
 				3F18048659F5F43F419C387D /* Embed Foundation Extensions */,
 			);
 			buildRules = (
@@ -255,6 +271,18 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FC30F45BAE022B2E867EA26C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5EE9390D142414C9AAA4E1E4 /* Assets.xcassets in Resources */,
+				F5B0DD91B2F8FD5F02E6A0D3 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AA5B3CF529280471E0573D8E /* Sources */ = {
@@ -311,14 +339,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SL7FG4PAZA;
 				INFOPLIST_FILE = MessagesExtension/Resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Music Converter";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.musicconverter.messages;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.megh.musicconverter.messages;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -337,7 +364,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.musicconverter;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.megh.musicconverter;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -388,7 +415,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.musicconverter;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.megh.musicconverter;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -400,14 +427,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SL7FG4PAZA;
 				INFOPLIST_FILE = MessagesExtension/Resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Music Converter";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.musicconverter.messages;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.megh.musicconverter.messages;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
