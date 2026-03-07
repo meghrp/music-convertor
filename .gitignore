@@ -1,0 +1,26 @@
+# macOS
+.DS_Store
+
+# Xcode / Swift
+DerivedData/
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xccheckout
+*.xcuserstate
+.swiftpm/
+Packages/
+build/
+
+# Node / Cloudflare Workers
+node_modules/
+dist/
+coverage/
+.wrangler/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
