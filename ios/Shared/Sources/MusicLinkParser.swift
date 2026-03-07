@@ -81,17 +81,17 @@ enum MusicLinkParser {
       throw LinkParseError.missingTrackIdentifier
     }
 
-    let resourceSegment = pathComponents[pathComponents.count - 2]
-    guard resourceSegment == "song" else {
-      throw LinkParseError.unsupportedLinkType
-    }
-
     if let idFromQuery = URLComponents(url: url, resolvingAgainstBaseURL: false)?
       .queryItems?
       .first(where: { $0.name == "i" })?
       .value,
       !idFromQuery.isEmpty {
       return ParsedMusicLink(sourceURL: url, sourcePlatform: .appleMusic, sourceTrackID: idFromQuery)
+    }
+
+    let resourceSegment = pathComponents[pathComponents.count - 2]
+    guard resourceSegment == "song" else {
+      throw LinkParseError.unsupportedLinkType
     }
 
     if let last = pathComponents.last, !last.isEmpty {

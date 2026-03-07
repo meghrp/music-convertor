@@ -1,0 +1,10 @@
+name = "music-converter"
+main = "src/index.ts"
+compatibility_date = "2026-03-07"
+
+[observability]
+enabled = true
+
+[vars]
+APPLE_MUSIC_STOREFRONT = "us"
+

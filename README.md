@@ -10,8 +10,11 @@ Greenfield project for converting Apple Music track links to Spotify and Spotify
 
 ## Getting Started
 
-1. Build and run the iOS project from `ios/`.
-2. Configure backend secrets and run Worker from `backend/`.
-3. Point the iMessage extension config at your deployed Worker URL.
+1. `cd backend && npm install`
+2. Configure Worker secrets with `wrangler secret put ...` (see `backend/README.md`).
+3. Run backend locally with `npm run dev`.
+4. `cd ios && xcodegen generate`.
+5. Open `ios/MusicConverter.xcodeproj` and run the app + Messages extension.
+6. Set `BACKEND_BASE_URL` in `ios/MessagesExtension/Resources/Info.plist` to your Worker URL.
 
-Detailed setup is documented in `docs/`.
+Detailed setup is documented in `docs/architecture.md` and `backend/README.md`.
