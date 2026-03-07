@@ -1,0 +1,27 @@
+name: TestFlight Readiness
+
+on:
+  pull_request:
+    paths:
+      - 'ios/**'
+      - 'scripts/ci/testflight-readiness.sh'
+      - 'docs/testflight-checklist.md'
+      - '.github/workflows/testflight-readiness.yml'
+  workflow_dispatch:
+
+jobs:
+  readiness:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run TestFlight readiness script
+        run: scripts/ci/testflight-readiness.sh
+
+      - name: Upload checklist artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: testflight-checklist
+          path: docs/testflight-checklist.md

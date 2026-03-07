@@ -1,0 +1,20 @@
+name: Bundle TestFlight Checklist
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  attach-checklist:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Attach checklist to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: docs/testflight-checklist.md

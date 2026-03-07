@@ -34,6 +34,11 @@ cd ios
 xcodegen generate
 ```
 
+TestFlight readiness gate:
+```bash
+scripts/ci/testflight-readiness.sh
+```
+
 Simulator build:
 ```bash
 xcodebuild -project ios/MusicConverter.xcodeproj -scheme MusicConverterApp \
@@ -55,6 +60,11 @@ xcrun devicectl device install app --device <DEVICE_ID> \
 2. iMessage extension must include `NSExtension` and `CFBundleDisplayName` in `ios/MessagesExtension/Resources/Info.plist`, or device install will fail.
 3. If install errors mention stale bundle/appex validation, uninstall app from device and reinstall.
 4. Do not commit secrets. Use `wrangler secret put ...`.
+5. TestFlight releases require non-placeholder bundle IDs (avoid `com.example.*`) and an `AppIcon.appiconset`; the readiness script checks these.
+
+## GitHub Automation
+- `.github/workflows/testflight-readiness.yml` runs `scripts/ci/testflight-readiness.sh` on iOS-related PRs and manual dispatch.
+- `.github/workflows/release-checklist-asset.yml` attaches `docs/testflight-checklist.md` to published GitHub Releases.
 
 ## Commit Guidance
 - Prefer small commits by area:
