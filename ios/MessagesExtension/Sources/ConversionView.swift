@@ -29,6 +29,7 @@ struct ConversionView: View {
       .disabled(viewModel.isLoading || viewModel.inputURL.isEmpty)
 
       if !viewModel.outputURL.isEmpty {
+        let convertedURL = URL(string: viewModel.outputURL)
         VStack(alignment: .leading, spacing: 8) {
           Text("Converted Link")
             .font(.subheadline)
@@ -36,12 +37,23 @@ struct ConversionView: View {
           Text(viewModel.outputURL)
             .font(.footnote)
             .textSelection(.enabled)
-          Button("Copy") {
-            UIPasteboard.general.string = viewModel.outputURL
-            viewModel.statusMessage = "Copied link to clipboard."
+          HStack(spacing: 8) {
+            Button("Copy Link") {
+              UIPasteboard.general.string = viewModel.outputURL
+              viewModel.statusMessage = "Copied link to clipboard."
+            }
+            .buttonStyle(.bordered)
+            .disabled(!viewModel.canCopy)
+
+            if let convertedURL {
+              Link("Open Link", destination: convertedURL)
+                .buttonStyle(.bordered)
+            } else {
+              Button("Open Link") {}
+                .buttonStyle(.bordered)
+                .disabled(true)
+            }
           }
-          .buttonStyle(.bordered)
-          .disabled(!viewModel.canCopy)
         }
       }
 
