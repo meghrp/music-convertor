@@ -11,13 +11,17 @@ targets:
     deploymentTarget: "16.0"
     sources:
       - path: App/Sources
+      - path: App/Resources
+        excludes:
+          - Info.plist
     info:
       path: App/Resources/Info.plist
       properties:
         UILaunchScreen: {}
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.example.musicconverter
+        PRODUCT_BUNDLE_IDENTIFIER: dev.megh.musicconverter
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         DEVELOPMENT_TEAM: SL7FG4PAZA
         CODE_SIGN_STYLE: Automatic
     dependencies:
@@ -36,10 +40,17 @@ targets:
       - path: Shared/Sources
     info:
       path: MessagesExtension/Resources/Info.plist
+      properties:
+        CFBundleDisplayName: Music Converter
+        BACKEND_BASE_URL: https://music-converter.meghrp27.workers.dev
+        NSExtension:
+          NSExtensionAttributes:
+            MSMessagesExtensionStorefront: messages
+          NSExtensionPointIdentifier: com.apple.message-payload-provider
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).MessagesViewController
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.example.musicconverter.messages
-        INFOPLIST_KEY_CFBundleDisplayName: Music Converter
+        PRODUCT_BUNDLE_IDENTIFIER: dev.megh.musicconverter.messages
         DEVELOPMENT_TEAM: SL7FG4PAZA
         CODE_SIGN_STYLE: Automatic
     dependencies:

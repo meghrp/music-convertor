@@ -21,3 +21,7 @@ This directory contains:
 ## Configuration
 
 Set `BACKEND_BASE_URL` in `MessagesExtension/Resources/Info.plist` to your Worker URL.
+
+TestFlight notes:
+- App icon assets live in `App/Resources/Assets.xcassets/AppIcon.appiconset`.
+- Privacy manifest lives in `App/Resources/PrivacyInfo.xcprivacy`.

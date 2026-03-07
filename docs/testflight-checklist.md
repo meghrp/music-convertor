@@ -9,7 +9,7 @@ This checklist is tuned to this repository (`ios/` + iMessage extension) and can
 - [ ] Verify extension visual assets (if any) are included and load on device.
 
 Current repo status:
-- `scripts/ci/testflight-readiness.sh` fails if no `AppIcon*.appiconset/Contents.json` is present.
+- `AppIcon.appiconset` now exists under `ios/App/Resources/Assets.xcassets`.
 
 ## 2) Privacy and Metadata
 
@@ -23,9 +23,9 @@ Current repo status:
 
 ## 3) Bundle Naming and Versioning
 
-- [ ] Replace placeholder bundle IDs in `ios/project.yml`:
-  - App: `com.example.musicconverter` -> production ID.
-  - Extension: `com.example.musicconverter.messages` -> production ID.
+- [ ] Keep production bundle IDs stable in `ios/project.yml`:
+  - App: `dev.megh.musicconverter`
+  - Extension: `dev.megh.musicconverter.messages`
 - [ ] Keep extension ID namespaced under app ID (`<app-bundle-id>.<suffix>`).
 - [ ] Keep app and extension versions/build numbers aligned:
   - `CFBundleShortVersionString`
@@ -70,6 +70,8 @@ This repo now includes:
 
 - `.github/workflows/testflight-readiness.yml`
   - Runs readiness checks on pull requests and manual dispatch.
+- `.github/workflows/ios-release-build.yml`
+  - Generates Xcode project and builds `Release` configuration for simulator (unsigned).
 - `.github/workflows/release-checklist-asset.yml`
   - On GitHub Release publish, uploads this checklist as a release asset.
 

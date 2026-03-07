@@ -1,7 +1,7 @@
 # AGENTS.md
 
 ## Purpose
-This repo is an iOS + Cloudflare Workers MVP that converts Apple Music <-> Spotify track links for use in iMessage.
+This repo is an iOS + Cloudflare Workers app that converts Apple Music <-> Spotify track links for use in iMessage, with TestFlight-oriented release checks.
 
 ## Repo Map
 - `backend/`: Cloudflare Worker API (`POST /convert`), provider adapters, matching logic, tests.
@@ -64,6 +64,7 @@ xcrun devicectl device install app --device <DEVICE_ID> \
 
 ## GitHub Automation
 - `.github/workflows/testflight-readiness.yml` runs `scripts/ci/testflight-readiness.sh` on iOS-related PRs and manual dispatch.
+- `.github/workflows/ios-release-build.yml` runs XcodeGen and a `Release` simulator build (`CODE_SIGNING_ALLOWED=NO`) on iOS-related PRs.
 - `.github/workflows/release-checklist-asset.yml` attaches `docs/testflight-checklist.md` to published GitHub Releases.
 
 ## Commit Guidance
