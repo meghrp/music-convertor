@@ -1,7 +1,6 @@
 export type Platform = "APPLE_MUSIC" | "SPOTIFY";
 
 export interface Env {
-  APPLE_MUSIC_DEVELOPER_TOKEN: string;
   SPOTIFY_CLIENT_ID: string;
   SPOTIFY_CLIENT_SECRET: string;
   APPLE_MUSIC_STOREFRONT?: string;
@@ -40,7 +39,7 @@ export interface ConvertSuccess {
   targetPlatform: Platform;
   sourceTrackId: string;
   targetUrl: string;
-  matchedBy: "ISRC" | "FUZZY";
+  matchedBy: "ISRC" | "FUZZY" | "LINK_SERVICE";
   confidence: number;
 }
 

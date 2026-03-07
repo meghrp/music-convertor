@@ -2,6 +2,7 @@ import { AppError } from "./errors";
 import { parseSourceLink } from "./linkParser";
 import { matchCandidate } from "./matcher";
 import { getAppleTrack, searchAppleCandidates } from "./providers/appleMusic";
+import { resolveViaSongLink } from "./providers/songLink";
 import { getSpotifyTrack, searchSpotifyCandidates } from "./providers/spotify";
 import type { ConvertSuccess, Env, ErrorBody } from "./types";
 
@@ -37,6 +38,29 @@ export default {
 
       const parsed = parseSourceLink(body.sourceUrl);
       const storefront = parsed.storefront ?? env.APPLE_MUSIC_STOREFRONT ?? "us";
+      const targetPlatform = parsed.platform === "SPOTIFY" ? "APPLE_MUSIC" : "SPOTIFY";
+
+      try {
+        const targetURL = await resolveViaSongLink(parsed.sourceUrl, targetPlatform);
+        const serviceResult: ConvertSuccess = {
+          sourcePlatform: parsed.platform,
+          targetPlatform,
+          sourceTrackId: parsed.trackId,
+          targetUrl: targetURL,
+          matchedBy: "LINK_SERVICE",
+          confidence: 0.9
+        };
+        logEvent("convert_success", {
+          sourcePlatform: serviceResult.sourcePlatform,
+          targetPlatform: serviceResult.targetPlatform,
+          matchedBy: serviceResult.matchedBy,
+          confidence: serviceResult.confidence,
+          latencyMs: Date.now() - start
+        });
+        return cors(json(serviceResult, 200));
+      } catch {
+        // Fallback to native provider matching when Songlink is unavailable.
+      }
 
       const result =
         parsed.platform === "SPOTIFY"
@@ -67,7 +91,7 @@ export default {
 
 async function convertSpotifyToApple(env: Env, trackId: string, storefront: string): Promise<ConvertSuccess> {
   const source = await getSpotifyTrack(env, trackId);
-  const candidates = await searchAppleCandidates(env, source, storefront);
+  const candidates = await searchAppleCandidates(source, storefront);
   const match = matchCandidate(source, candidates);
   return {
     sourcePlatform: "SPOTIFY",
@@ -80,7 +104,7 @@ async function convertSpotifyToApple(env: Env, trackId: string, storefront: stri
 }
 
 async function convertAppleToSpotify(env: Env, trackId: string, storefront: string): Promise<ConvertSuccess> {
-  const source = await getAppleTrack(env, trackId, storefront);
+  const source = await getAppleTrack(trackId, storefront);
   const candidates = await searchSpotifyCandidates(env, source);
   const match = matchCandidate(source, candidates);
   return {

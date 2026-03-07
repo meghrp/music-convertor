@@ -35,7 +35,7 @@ export function matchCandidate(source: CanonicalTrack, candidates: CandidateTrac
     throw new AppError("NO_MATCH", "No confident fuzzy match was found.", 404);
   }
 
-  if (second && best.score - second.score < 0.08) {
+  if (second && best.score - second.score < 0.03 && normalizedArtist(best.candidate.artist) !== normalizedArtist(second.candidate.artist)) {
     throw new AppError("AMBIGUOUS_MATCH", "Multiple likely matches found.", 409);
   }
 
@@ -59,6 +59,10 @@ function normalize(value: string): string[] {
     .replace(/[^a-z0-9\s]/g, " ")
     .split(/\s+/)
     .filter(Boolean);
+}
+
+function normalizedArtist(value: string): string {
+  return normalize(value).join(" ");
 }
 
 function overlap(left: string[], right: string[]): number {

@@ -3,7 +3,6 @@ import { resetSpotifyTokenCacheForTest, searchSpotifyCandidates } from "../src/p
 import type { CanonicalTrack, Env } from "../src/types";
 
 const env: Env = {
-  APPLE_MUSIC_DEVELOPER_TOKEN: "token",
   SPOTIFY_CLIENT_ID: "id",
   SPOTIFY_CLIENT_SECRET: "secret",
   APPLE_MUSIC_STOREFRONT: "us"
