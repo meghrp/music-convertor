@@ -3,6 +3,7 @@ import UIKit
 
 struct ConversionView: View {
   @ObservedObject var viewModel: ConversionViewModel
+  let onSendLink: (String) async -> Void
 
   var body: some View {
     VStack(alignment: .leading, spacing: 12) {
@@ -26,6 +27,24 @@ struct ConversionView: View {
         }
       }
       .buttonStyle(.borderedProminent)
+      .disabled(viewModel.isLoading || viewModel.inputURL.isEmpty)
+
+      Button {
+        Task {
+          await viewModel.convert()
+          guard !viewModel.outputURL.isEmpty else { return }
+          await onSendLink(viewModel.outputURL)
+        }
+      } label: {
+        if viewModel.isLoading {
+          ProgressView()
+            .frame(maxWidth: .infinity)
+        } else {
+          Text("Convert & Insert")
+            .frame(maxWidth: .infinity)
+        }
+      }
+      .buttonStyle(.bordered)
       .disabled(viewModel.isLoading || viewModel.inputURL.isEmpty)
 
       if !viewModel.outputURL.isEmpty {
