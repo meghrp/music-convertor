@@ -28,6 +28,7 @@ npx wrangler deploy
 - Extension is embedded in app target via project.yml dependency.
 - Extension backend URL is in `ios/MessagesExtension/Resources/Info.plist` (`BACKEND_BASE_URL`).
 - Messages extension supports direct insert flow: `Convert & Insert` converts and inserts the link into the active conversation compose field (no manual copy/paste).
+- Temporary local-device signing fallback currently uses bundle IDs `com.example.musicconverter` and `com.example.musicconverter.messages` to reuse existing provisioning profiles; switch back to non-placeholder IDs before TestFlight.
 
 ## iOS Commands
 ```bash
