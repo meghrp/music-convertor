@@ -11,7 +11,7 @@ This repo is an iOS + Cloudflare Workers app that converts Apple Music <-> Spoti
 ## Backend Defaults
 - Runtime: Cloudflare Workers.
 - Primary conversion path: Songlink (`backend/src/providers/songLink.ts`).
-- Fallback path: provider-based matching (`itunes` + Spotify Web API).
+- Fallback path: provider-based matching (`itunes` + Spotify Web API), with Spotify Open Graph metadata fallback when Spotify track API lookup fails.
 - Deploy URL (current): `https://music-converter.meghrp27.workers.dev`
 
 ## Backend Commands

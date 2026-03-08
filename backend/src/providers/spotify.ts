@@ -10,11 +10,20 @@ let cachedToken: TokenCache | undefined;
 
 export async function getSpotifyTrack(env: Env, trackId: string): Promise<CanonicalTrack> {
   const token = await getSpotifyToken(env);
-  const response = await fetch(`https://api.spotify.com/v1/tracks/${trackId}`, {
+  const market = normalizeSpotifyMarket(env.APPLE_MUSIC_STOREFRONT);
+  const trackUrl = new URL(`https://api.spotify.com/v1/tracks/${trackId}`);
+  if (market) {
+    trackUrl.searchParams.set("market", market);
+  }
+  const response = await fetch(trackUrl.toString(), {
     headers: { Authorization: `Bearer ${token}` }
   });
 
   if (!response.ok) {
+    const fallback = await getSpotifyTrackFromOpenGraph(trackId);
+    if (fallback) {
+      return fallback;
+    }
     throw new AppError("PROVIDER_ERROR", "Spotify track lookup failed.", 502);
   }
 
@@ -29,6 +38,84 @@ export async function getSpotifyTrack(env: Env, trackId: string): Promise<Canoni
     url: data.external_urls?.spotify ?? `https://open.spotify.com/track/${data.id}`,
     popularity: data.popularity
   };
+}
+
+function normalizeSpotifyMarket(storefront?: string): string | undefined {
+  if (!storefront) {
+    return undefined;
+  }
+  const trimmed = storefront.trim().toUpperCase();
+  if (!/^[A-Z]{2}$/.test(trimmed)) {
+    return undefined;
+  }
+  return trimmed;
+}
+
+async function getSpotifyTrackFromOpenGraph(trackId: string): Promise<CanonicalTrack | null> {
+  const response = await fetch(`https://open.spotify.com/track/${encodeURIComponent(trackId)}`);
+  if (!response.ok) {
+    return null;
+  }
+  const html = await response.text();
+  const title = extractMeta(html, "property", "og:title") ?? extractMeta(html, "name", "twitter:title");
+  const artist =
+    extractMeta(html, "name", "music:musician_description") ?? extractArtistFromDescription(extractMeta(html, "property", "og:description"));
+  const durationSeconds = Number(extractMeta(html, "name", "music:duration"));
+  if (!title || !artist) {
+    return null;
+  }
+  return {
+    platform: "SPOTIFY",
+    trackId,
+    title,
+    artist,
+    durationMs: Number.isFinite(durationSeconds) && durationSeconds > 0 ? Math.round(durationSeconds * 1000) : undefined,
+    url: `https://open.spotify.com/track/${trackId}`
+  };
+}
+
+function extractArtistFromDescription(description?: string): string | undefined {
+  if (!description) {
+    return undefined;
+  }
+  const [artist] = description.split("·");
+  const normalized = artist?.trim();
+  return normalized || undefined;
+}
+
+function extractMeta(html: string, attrName: "property" | "name", attrValue: string): string | undefined {
+  const escaped = escapeRegex(attrValue);
+  const contentFirstPattern = new RegExp(
+    `<meta[^>]*content=["']([^"']+)["'][^>]*${attrName}=["']${escaped}["'][^>]*>`,
+    "i"
+  );
+  const attrFirstPattern = new RegExp(
+    `<meta[^>]*${attrName}=["']${escaped}["'][^>]*content=["']([^"']+)["'][^>]*>`,
+    "i"
+  );
+
+  const contentFirstMatch = html.match(contentFirstPattern);
+  if (contentFirstMatch?.[1]) {
+    return decodeHtmlEntity(contentFirstMatch[1].trim());
+  }
+  const attrFirstMatch = html.match(attrFirstPattern);
+  if (attrFirstMatch?.[1]) {
+    return decodeHtmlEntity(attrFirstMatch[1].trim());
+  }
+  return undefined;
+}
+
+function decodeHtmlEntity(value: string): string {
+  return value
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">");
+}
+
+function escapeRegex(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 export async function searchSpotifyCandidates(env: Env, source: CanonicalTrack): Promise<CandidateTrack[]> {
